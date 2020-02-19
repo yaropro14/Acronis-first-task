@@ -9,13 +9,21 @@
 #include <iostream>
 #include <string>
 
-
+void cycle();
 int div_by_3(std::string buf);
+int div_by_5(std::string buf);
+int test();
 
 int main(int argc, const char * argv[]) {
     
-    std::cout << "Hello, World!\n";
+    test();
+    cycle();
     
+    return 0;
+}
+
+void cycle()
+{
     std::string buf;
     
     while(1) {
@@ -24,15 +32,20 @@ int main(int argc, const char * argv[]) {
         
         if(buf[0] == 'e') break;
         
-        if(div_by_3(buf))  std::cout << "fizz";
+            else if(div_by_3(buf))  std::cout << "fizz" << std::endl;
         
-        if(buf[buf.size() - 1] == '0' || buf[buf.size() - 1] == '5')    std::cout << "buzz";
-        
+                else if(div_by_5(buf))    std::cout << "buzz" << std::endl;
                     
-            else std::cout << buf;
+                    else std::cout << buf << std::endl;
     }
+}
+
+int div_by_5(std::string buf)
+{
+    if(buf[buf.size() - 1] == '0' || buf[buf.size() - 1] == '5')    return 1;
+       
+        else return 0;
     
-    return 0;
 }
 
 int div_by_3(std::string buf) {
@@ -57,4 +70,32 @@ int div_by_3(std::string buf) {
     }
     
         else    return 0;
+}
+
+
+int test()
+{
+    std::string buf = "535555555555";
+    if(div_by_5(buf) == 0) return 1;
+    
+    buf = "5500000000000000000000000";
+    if(div_by_5(buf) == 0) return 1;
+    
+    buf = "10";
+    if(div_by_5(buf) == 0) return 1;
+    
+    buf = "15";
+    if(div_by_5(buf) == 0 || div_by_3(buf) == 0) return 1;
+    
+    buf = "-15";
+    if(div_by_5(buf) == 0 || div_by_3(buf) == 0) return 1;
+    
+    buf = "-33";
+    if(div_by_5(buf) == 0 || div_by_3(buf) == 0) return 1;
+    
+    buf = "999";
+    if(div_by_5(buf) == 0 || div_by_3(buf) == 0) return 1;
+    
+        else return 0;
+    
 }
